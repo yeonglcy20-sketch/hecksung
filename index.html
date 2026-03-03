@@ -13,9 +13,9 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root{
-  --purpleA: rgba(170, 120, 255, 0.35);
-  --goldA: rgba(255, 210, 90, 0.35);
-  --panelShadow: 0 10px 26px rgba(0,0,0,0.28);
+  /* 투명도 더 낮춤 (배경 잘 보이게) */
+  --purpleA: rgba(170, 120, 255, 0.15);
+  --goldA: rgba(255, 210, 90, 0.15);
 }
 
 body {
@@ -40,13 +40,12 @@ body {
     width: 44px;
     height: 44px;
     border-radius: 14px;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.6);
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    backdrop-filter: blur(10px);
 }
 .bg-upload input{ display:none; }
 
@@ -54,7 +53,7 @@ body {
     height: 44px;
     padding: 0 14px;
     border-radius: 14px;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.6);
     color: white;
     cursor: pointer;
     font-weight: 900;
@@ -91,9 +90,13 @@ body {
     align-items: center;
     padding: 18px 22px;
     border-radius: 52px;
-    backdrop-filter: blur(12px);
+
+    /* 블러 완전 제거 */
+    backdrop-filter: none;
+
+    /* 더 투명한 그라데이션 */
     background: linear-gradient(90deg, var(--purpleA), var(--goldA));
-    box-shadow: var(--panelShadow);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
 }
 
 .day {
@@ -116,7 +119,7 @@ body {
     padding: 8px 12px;
     border-radius: 14px;
     border: none;
-    background: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.8);
 }
 
 .time-input { width: 170px; }
