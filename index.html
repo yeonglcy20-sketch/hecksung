@@ -62,6 +62,14 @@ body {
     color: white;
     margin-bottom: 50px;
     text-shadow: 0 0 20px rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.title img {
+    height: 70px;
 }
 
 .schedule {
@@ -82,8 +90,6 @@ body {
     font-size: 42px;
     width: 100px;
     color: white;
-
-    /* 테두리 얇게 수정 */
     -webkit-text-stroke: 1px rgba(0,0,0,0.7);
     text-shadow: 0 0 4px rgba(0,0,0,0.6);
 }
@@ -120,7 +126,11 @@ body {
 </div>
 
 <div id="capture">
-  <div class="title">⭐ Heuk Sung ⭐</div>
+  <div class="title">
+      <img src="crow.png">
+      Heuk Sung
+      <img src="crow.png">
+  </div>
   <div class="schedule">
 
     <div class="day-box">
