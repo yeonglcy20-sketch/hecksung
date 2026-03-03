@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Heuk Sung Schedule</title>
 
-<!-- 귀여운 한글 폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
@@ -20,17 +19,14 @@
 }
 
 body {
-    font-family: 'Jua', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-    background: url('default-bg.jpg') no-repeat center center fixed;
-    background-size: cover;
+    font-family: 'Jua', sans-serif;
+    background: #000;
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 34px 18px 60px;
+    justify-content: center;
+    padding: 30px 10px;
 }
 
-/* 상단 우측 컨트롤 */
 .controls {
     position: fixed;
     top: 16px;
@@ -38,22 +34,18 @@ body {
     z-index: 200;
     display: flex;
     gap: 10px;
-    align-items: center;
 }
 
-/* 배경 업로드 버튼 */
 .bg-upload {
     width: 44px;
     height: 44px;
     border-radius: 14px;
-    border: 1px solid rgba(255,255,255,0.35);
-    background: rgba(0,0,0,0.35);
-    color: #fff;
-    box-shadow: var(--panelShadow);
-    cursor: pointer;
-    display: inline-flex;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
     backdrop-filter: blur(10px);
 }
 .bg-upload input{ display:none; }
@@ -62,102 +54,80 @@ body {
     height: 44px;
     padding: 0 14px;
     border-radius: 14px;
-    border: 1px solid rgba(255,255,255,0.35);
-    background: rgba(0,0,0,0.35);
-    color: #fff;
-    box-shadow: var(--panelShadow);
+    background: rgba(0,0,0,0.5);
+    color: white;
     cursor: pointer;
-    font-size: 18px;
     font-weight: 900;
-    letter-spacing: 0.2px;
-    backdrop-filter: blur(10px);
 }
 
-/* 캡처 영역 */
 #capture {
     width: min(980px, 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: url('default-bg.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 40px 20px 60px;
+    border-radius: 20px;
 }
 
-/* 상단 타이틀 */
 .title {
-    font-size: clamp(40px, 6vw, 64px);
+    font-size: 60px;
     font-weight: 900;
     color: white;
-    margin: 10px 0 26px;
-    text-shadow: 0 0 22px rgba(0,0,0,0.65);
+    margin-bottom: 30px;
+    text-shadow: 0 0 20px rgba(0,0,0,0.6);
 }
 
-/* 스케줄 카드 */
 .schedule {
-    width: min(900px, 100%);
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    padding: 8px 6px;
+    gap: 18px;
 }
 
-/* 하루 박스 */
 .day-box {
     display: flex;
     align-items: center;
     padding: 18px 22px;
     border-radius: 52px;
     backdrop-filter: blur(12px);
-    /* 보라+금색 그라데이션 + 더 투명하게 */
     background: linear-gradient(90deg, var(--purpleA), var(--goldA));
     box-shadow: var(--panelShadow);
-    border: 1px solid rgba(255,255,255,0.22);
 }
 
-/* 요일 */
 .day {
     font-size: 38px;
     font-weight: 900;
-    width: 86px;
-    color: #ffffff;
-    text-shadow: 0 0 14px rgba(0,0,0,0.35);
+    width: 80px;
+    color: white;
 }
 
-/* 내용 영역 */
 .content {
     flex: 1;
     display: flex;
     gap: 14px;
-    align-items: center;
 }
 
-/* 입력창 */
 .time-input, .text-input {
     font-family: inherit;
-    font-weight: 900;              /* 글씨 더 두껍게 */
+    font-weight: 900;
     font-size: 26px;
     padding: 8px 12px;
     border-radius: 14px;
-    border: 1px solid rgba(255,255,255,0.25);
-    outline: none;
-    background: rgba(255,255,255,0.70); /* 입력칸도 배경이 비치게 */
-    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    border: none;
+    background: rgba(255,255,255,0.7);
 }
 
 .time-input { width: 170px; }
-.text-input { flex: 1; min-width: 0; }
+.text-input { flex: 1; }
 
-@media (max-width: 640px){
-  .day { width: 64px; font-size: 32px; }
-  .day-box { padding: 14px 14px; border-radius: 34px; }
-  .time-input, .text-input { font-size: 20px; }
-  .time-input { width: 132px; }
-}
 </style>
 </head>
 <body>
 
 <div class="controls">
-  <label class="bg-upload" title="배경 업로드">
-    📷
+  <label class="bg-upload">📷
     <input type="file" accept="image/*" onchange="changeBG(event)">
   </label>
   <button class="ctrl-btn" onclick="saveJPG()">JPG 저장</button>
@@ -176,6 +146,7 @@ body {
           </div>
       </div>
 
+
       <div class="day-box">
           <div class="day">월</div>
           <div class="content">
@@ -183,6 +154,7 @@ body {
               <input class="text-input" placeholder="내용 입력">
           </div>
       </div>
+
 
       <div class="day-box">
           <div class="day">화</div>
@@ -192,6 +164,7 @@ body {
           </div>
       </div>
 
+
       <div class="day-box">
           <div class="day">수</div>
           <div class="content">
@@ -199,6 +172,7 @@ body {
               <input class="text-input" placeholder="내용 입력">
           </div>
       </div>
+
 
       <div class="day-box">
           <div class="day">목</div>
@@ -208,6 +182,7 @@ body {
           </div>
       </div>
 
+
       <div class="day-box">
           <div class="day">금</div>
           <div class="content">
@@ -215,6 +190,7 @@ body {
               <input class="text-input" placeholder="내용 입력">
           </div>
       </div>
+
 
       <div class="day-box">
           <div class="day">토</div>
@@ -227,18 +203,18 @@ body {
   </div>
 </div>
 
-<!-- JPG 저장용 라이브러리 -->
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
 <script>
 function changeBG(event) {
     const file = event.target.files[0];
     if (!file) return;
+
     const reader = new FileReader();
     reader.onload = function(e) {
-        document.body.style.background =
-            "url('" + e.target.result + "') no-repeat center center fixed";
-        document.body.style.backgroundSize = "cover";
+        const cap = document.getElementById("capture");
+        cap.style.background = "url('" + e.target.result + "') no-repeat center center";
+        cap.style.backgroundSize = "cover";
     };
     reader.readAsDataURL(file);
 }
@@ -249,7 +225,6 @@ async function saveJPG(){
 
   const canvas = await html2canvas(target, {
     scale: 2,
-    backgroundColor: null,
     useCORS: true
   });
 
