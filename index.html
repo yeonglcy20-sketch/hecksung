@@ -2,162 +2,233 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Heuk Sung Schedule</title>
+
+<!-- 귀여운 한글 폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+:root{
+  --purpleA: rgba(170, 120, 255, 0.35);
+  --goldA: rgba(255, 210, 90, 0.35);
+  --panelShadow: 0 10px 26px rgba(0,0,0,0.28);
+}
+
 body {
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Jua', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
     background: url('default-bg.jpg') no-repeat center center fixed;
     background-size: cover;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px 20px;
+    padding: 34px 18px 60px;
+}
+
+/* 상단 우측 컨트롤 */
+.controls {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 200;
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
 /* 배경 업로드 버튼 */
 .bg-upload {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 100;
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.35);
+    background: rgba(0,0,0,0.35);
+    color: #fff;
+    box-shadow: var(--panelShadow);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+}
+.bg-upload input{ display:none; }
+
+.ctrl-btn {
+    height: 44px;
+    padding: 0 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.35);
+    background: rgba(0,0,0,0.35);
+    color: #fff;
+    box-shadow: var(--panelShadow);
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 0.2px;
+    backdrop-filter: blur(10px);
+}
+
+/* 캡처 영역 */
+#capture {
+    width: min(980px, 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* 상단 타이틀 */
 .title {
-    font-size: 60px;
-    font-weight: bold;
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 900;
     color: white;
-    margin-bottom: 40px;
-    text-shadow: 0 0 20px rgba(0,0,0,0.6);
+    margin: 10px 0 26px;
+    text-shadow: 0 0 22px rgba(0,0,0,0.65);
 }
 
 /* 스케줄 카드 */
 .schedule {
-    width: 900px;
+    width: min(900px, 100%);
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 16px;
+    padding: 8px 6px;
 }
 
 /* 하루 박스 */
 .day-box {
     display: flex;
     align-items: center;
-    padding: 18px 24px;
-    border-radius: 50px;
-    backdrop-filter: blur(10px);
-    background: rgba(255, 215, 0, 0.65); /* 반투명 */
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    padding: 18px 22px;
+    border-radius: 52px;
+    backdrop-filter: blur(12px);
+    /* 보라+금색 그라데이션 + 더 투명하게 */
+    background: linear-gradient(90deg, var(--purpleA), var(--goldA));
+    box-shadow: var(--panelShadow);
+    border: 1px solid rgba(255,255,255,0.22);
 }
 
 /* 요일 */
 .day {
-    font-size: 36px;
-    font-weight: bold;
-    width: 80px;
-    color: white;
+    font-size: 38px;
+    font-weight: 900;
+    width: 86px;
+    color: #ffffff;
+    text-shadow: 0 0 14px rgba(0,0,0,0.35);
 }
 
 /* 내용 영역 */
 .content {
     flex: 1;
     display: flex;
-    gap: 20px;
+    gap: 14px;
     align-items: center;
 }
 
-/* 시간 */
-.time-input {
-    width: 160px;
-    font-size: 24px;
-    padding: 6px 10px;
-    border-radius: 10px;
-    border: none;
+/* 입력창 */
+.time-input, .text-input {
+    font-family: inherit;
+    font-weight: 900;              /* 글씨 더 두껍게 */
+    font-size: 26px;
+    padding: 8px 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.25);
+    outline: none;
+    background: rgba(255,255,255,0.70); /* 입력칸도 배경이 비치게 */
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
 }
 
-/* 내용 */
-.text-input {
-    flex: 1;
-    font-size: 24px;
-    padding: 6px 10px;
-    border-radius: 10px;
-    border: none;
-}
+.time-input { width: 170px; }
+.text-input { flex: 1; min-width: 0; }
 
-/* 입력창 디자인 */
-input {
-    background: rgba(255,255,255,0.85);
+@media (max-width: 640px){
+  .day { width: 64px; font-size: 32px; }
+  .day-box { padding: 14px 14px; border-radius: 34px; }
+  .time-input, .text-input { font-size: 20px; }
+  .time-input { width: 132px; }
 }
 </style>
 </head>
 <body>
 
-<input type="file" class="bg-upload" accept="image/*" onchange="changeBG(event)" title="배경 업로드">
-
-<div class="title">⭐ Heuk Sung ⭐</div>
-
-<div class="schedule">
-
-    <div class="day-box">
-        <div class="day">일</div>
-        <div class="content">
-            <input class="time-input" placeholder="시간 입력">
-            <input class="text-input" placeholder="내용 입력">
-        </div>
-    </div>
-
-    <div class="day-box">
-        <div class="day">월</div>
-        <div class="content">
-            <input class="time-input" placeholder="시간 입력">
-            <input class="text-input" placeholder="내용 입력">
-        </div>
-    </div>
-
-    <div class="day-box">
-        <div class="day">화</div>
-        <div class="content">
-            <input class="time-input" placeholder="시간 입력">
-            <input class="text-input" placeholder="내용 입력">
-        </div>
-    </div>
-
-    <div class="day-box">
-        <div class="day">수</div>
-        <div class="content">
-            <input class="time-input" placeholder="시간 입력">
-            <input class="text-input" placeholder="내용 입력">
-        </div>
-    </div>
-
-    <div class="day-box">
-        <div class="day">목</div>
-        <div class="content">
-            <input class="time-input" placeholder="시간 입력">
-            <input class="text-input" placeholder="내용 입력">
-        </div>
-    </div>
-
-    <div class="day-box">
-        <div class="day">금</div>
-        <div class="content">
-            <input class="time-input" placeholder="시간 입력">
-            <input class="text-input" placeholder="내용 입력">
-        </div>
-    </div>
-
-    <div class="day-box">
-        <div class="day">토</div>
-        <div class="content">
-            <input class="time-input" placeholder="시간 입력">
-            <input class="text-input" placeholder="내용 입력">
-        </div>
-    </div>
-
+<div class="controls">
+  <label class="bg-upload" title="배경 업로드">
+    📷
+    <input type="file" accept="image/*" onchange="changeBG(event)">
+  </label>
+  <button class="ctrl-btn" onclick="saveJPG()">JPG 저장</button>
 </div>
+
+<div id="capture">
+  <div class="title">⭐ Heuk Sung ⭐</div>
+
+  <div class="schedule">
+
+      <div class="day-box">
+          <div class="day">일</div>
+          <div class="content">
+              <input class="time-input" placeholder="시간 입력">
+              <input class="text-input" placeholder="내용 입력">
+          </div>
+      </div>
+
+      <div class="day-box">
+          <div class="day">월</div>
+          <div class="content">
+              <input class="time-input" placeholder="시간 입력">
+              <input class="text-input" placeholder="내용 입력">
+          </div>
+      </div>
+
+      <div class="day-box">
+          <div class="day">화</div>
+          <div class="content">
+              <input class="time-input" placeholder="시간 입력">
+              <input class="text-input" placeholder="내용 입력">
+          </div>
+      </div>
+
+      <div class="day-box">
+          <div class="day">수</div>
+          <div class="content">
+              <input class="time-input" placeholder="시간 입력">
+              <input class="text-input" placeholder="내용 입력">
+          </div>
+      </div>
+
+      <div class="day-box">
+          <div class="day">목</div>
+          <div class="content">
+              <input class="time-input" placeholder="시간 입력">
+              <input class="text-input" placeholder="내용 입력">
+          </div>
+      </div>
+
+      <div class="day-box">
+          <div class="day">금</div>
+          <div class="content">
+              <input class="time-input" placeholder="시간 입력">
+              <input class="text-input" placeholder="내용 입력">
+          </div>
+      </div>
+
+      <div class="day-box">
+          <div class="day">토</div>
+          <div class="content">
+              <input class="time-input" placeholder="시간 입력">
+              <input class="text-input" placeholder="내용 입력">
+          </div>
+      </div>
+
+  </div>
+</div>
+
+<!-- JPG 저장용 라이브러리 -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
 <script>
 function changeBG(event) {
@@ -170,6 +241,23 @@ function changeBG(event) {
         document.body.style.backgroundSize = "cover";
     };
     reader.readAsDataURL(file);
+}
+
+async function saveJPG(){
+  const target = document.getElementById('capture');
+  if (document.activeElement) document.activeElement.blur();
+
+  const canvas = await html2canvas(target, {
+    scale: 2,
+    backgroundColor: null,
+    useCORS: true
+  });
+
+  const jpg = canvas.toDataURL('image/jpeg', 0.95);
+  const a = document.createElement('a');
+  a.href = jpg;
+  a.download = 'schedule.jpg';
+  a.click();
 }
 </script>
 
