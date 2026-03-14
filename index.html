@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,214 +11,205 @@
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
+*{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  --purpleA: rgba(170,120,255,0.15);
-  --goldA: rgba(255,210,90,0.15);
+--purpleA:rgba(170,120,255,0.15);
+--goldA:rgba(255,210,90,0.15);
 }
 
-body {
-    font-family: 'Jua', sans-serif;
-    background: #000;
-    display: flex;
-    justify-content: center;
-    padding: 40px 20px;
+body{
+font-family:'Jua',sans-serif;
+background:#000;
+display:flex;
+justify-content:center;
+padding:40px 20px;
 }
 
-.controls {
-    position: fixed;
-    top: 16px;
-    right: 16px;
-    display: flex;
-    gap: 10px;
+.controls{
+position:fixed;
+top:16px;
+right:16px;
+display:flex;
+gap:10px;
 }
 
-.bg-upload, .ctrl-btn {
-    height: 44px;
-    padding: 0 14px;
-    border-radius: 14px;
-    background: rgba(0,0,0,0.6);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-weight: 900;
+.bg-upload,.ctrl-btn{
+height:44px;
+padding:0 14px;
+border-radius:14px;
+background:rgba(0,0,0,0.6);
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+font-weight:900;
 }
 
-.bg-upload input{ display:none; }
+.bg-upload input{display:none}
 
-#capture {
-    width: 1000px;
-    background: url('default-bg.jpg') no-repeat center center;
-    background-size: cover;
-    padding: 80px 60px;
-    border-radius: 20px;
+#capture{
+width:1000px;
+background:url('default-bg.jpg') center/cover no-repeat;
+padding:80px 60px;
+border-radius:20px;
 }
 
-.title {
-    font-size: 64px;
-    text-align: center;
-    color: white;
-    margin-bottom: 50px;
-    text-shadow: 0 0 20px rgba(0,0,0,0.8);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
+.title{
+font-size:64px;
+color:white;
+margin-bottom:50px;
+text-shadow:0 0 20px rgba(0,0,0,0.8);
+display:flex;
+align-items:center;
+justify-content:center;
+gap:30px;
 }
 
-.title img {
-    height: 175px; /* 70px → 250% 확대 */
+.title img{height:175px}
+
+.schedule{
+display:flex;
+flex-direction:column;
+gap:28px;
 }
 
-.schedule {
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
+.day-box{
+display:flex;
+align-items:center;
+padding:22px 28px;
+border-radius:60px;
+background:linear-gradient(90deg,var(--purpleA),var(--goldA));
 }
 
-.day-box {
-    display: flex;
-    align-items: center;
-    padding: 22px 28px;
-    border-radius: 60px;
-    background: linear-gradient(90deg, var(--purpleA), var(--goldA));
+.day{
+font-size:42px;
+width:100px;
+color:white;
+-webkit-text-stroke:1px rgba(0,0,0,0.7);
+text-shadow:0 0 4px rgba(0,0,0,0.6);
 }
 
-.day {
-    font-size: 42px;
-    width: 100px;
-    color: white;
-    -webkit-text-stroke: 1px rgba(0,0,0,0.7);
-    text-shadow: 0 0 4px rgba(0,0,0,0.6);
+.content{
+flex:1;
+display:flex;
+gap:20px;
 }
 
-.content {
-    flex: 1;
-    display: flex;
-    gap: 20px;
+.input-style{
+font-size:30px;
+font-weight:900;
+padding:12px 16px;
+border-radius:16px;
+background:rgba(255,255,255,0.9);
+min-height:56px;
+display:flex;
+align-items:center;
 }
 
-.input-style {
-    font-size: 30px;
-    font-weight: 900;
-    padding: 12px 16px;
-    border-radius: 16px;
-    background: rgba(255,255,255,0.9);
-    min-height: 56px;
-    display: flex;
-    align-items: center;
-}
-
-.time { width: 220px; }
-.text { flex: 1; }
-
+.time{width:220px}
+.text{flex:1}
 </style>
 </head>
 <body>
 
 <div class="controls">
-  <label class="bg-upload">📷
-    <input type="file" accept="image/*" onchange="changeBG(event)">
-  </label>
-  <div class="ctrl-btn" onclick="saveJPG()">JPG 저장</div>
+<label class="bg-upload">📷
+<input type="file" accept="image/*" onchange="changeBG(event)">
+</label>
+<div class="ctrl-btn" onclick="saveJPG()">JPG 저장</div>
 </div>
 
 <div id="capture">
-  <div class="title">
-      <img src="crow.png">
-      Heuk Sung
-      <img src="crow.png">
-  </div>
-  <div class="schedule">
+<div class="title">
+<img src="crow.png">
+Heuk Sung
+<img src="crow.png">
+</div>
 
-    <div class="day-box">
-        <div class="day">일</div>
-        <div class="content">
-            <div class="input-style time" contenteditable="true">시간 입력</div>
-            <div class="input-style text" contenteditable="true">내용 입력</div>
-        </div>
-    </div>
+<div class="schedule">
 
-    <div class="day-box">
-        <div class="day">월</div>
-        <div class="content">
-            <div class="input-style time" contenteditable="true">시간 입력</div>
-            <div class="input-style text" contenteditable="true">내용 입력</div>
-        </div>
-    </div>
+<div class="day-box">
+<div class="day">일</div>
+<div class="content">
+<div class="input-style time" contenteditable="true">시간 입력</div>
+<div class="input-style text" contenteditable="true">내용 입력</div>
+</div>
+</div>
 
-    <div class="day-box">
-        <div class="day">화</div>
-        <div class="content">
-            <div class="input-style time" contenteditable="true">시간 입력</div>
-            <div class="input-style text" contenteditable="true">내용 입력</div>
-        </div>
-    </div>
+<div class="day-box">
+<div class="day">월</div>
+<div class="content">
+<div class="input-style time" contenteditable="true">시간 입력</div>
+<div class="input-style text" contenteditable="true">내용 입력</div>
+</div>
+</div>
 
-    <div class="day-box">
-        <div class="day">수</div>
-        <div class="content">
-            <div class="input-style time" contenteditable="true">시간 입력</div>
-            <div class="input-style text" contenteditable="true">내용 입력</div>
-        </div>
-    </div>
+<div class="day-box">
+<div class="day">화</div>
+<div class="content">
+<div class="input-style time" contenteditable="true">시간 입력</div>
+<div class="input-style text" contenteditable="true">내용 입력</div>
+</div>
+</div>
 
-    <div class="day-box">
-        <div class="day">목</div>
-        <div class="content">
-            <div class="input-style time" contenteditable="true">시간 입력</div>
-            <div class="input-style text" contenteditable="true">내용 입력</div>
-        </div>
-    </div>
+<div class="day-box">
+<div class="day">수</div>
+<div class="content">
+<div class="input-style time" contenteditable="true">시간 입력</div>
+<div class="input-style text" contenteditable="true">내용 입력</div>
+</div>
+</div>
 
-    <div class="day-box">
-        <div class="day">금</div>
-        <div class="content">
-            <div class="input-style time" contenteditable="true">시간 입력</div>
-            <div class="input-style text" contenteditable="true">내용 입력</div>
-        </div>
-    </div>
+<div class="day-box">
+<div class="day">목</div>
+<div class="content">
+<div class="input-style time" contenteditable="true">시간 입력</div>
+<div class="input-style text" contenteditable="true">내용 입력</div>
+</div>
+</div>
 
-    <div class="day-box">
-        <div class="day">토</div>
-        <div class="content">
-            <div class="input-style time" contenteditable="true">시간 입력</div>
-            <div class="input-style text" contenteditable="true">내용 입력</div>
-        </div>
-    </div>
+<div class="day-box">
+<div class="day">금</div>
+<div class="content">
+<div class="input-style time" contenteditable="true">시간 입력</div>
+<div class="input-style text" contenteditable="true">내용 입력</div>
+</div>
+</div>
 
-  </div>
+<div class="day-box">
+<div class="day">토</div>
+<div class="content">
+<div class="input-style time" contenteditable="true">시간 입력</div>
+<div class="input-style text" contenteditable="true">내용 입력</div>
+</div>
+</div>
+
+</div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
 <script>
-function changeBG(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        const cap = document.getElementById("capture");
-        cap.style.background = "url('" + e.target.result + "') no-repeat center center";
-        cap.style.backgroundSize = "cover";
-    };
-    reader.readAsDataURL(file);
+function changeBG(event){
+const file=event.target.files[0];
+if(!file)return;
+const reader=new FileReader();
+reader.onload=function(e){
+const cap=document.getElementById("capture");
+cap.style.background="url('"+e.target.result+"') center/cover no-repeat";
+};
+reader.readAsDataURL(file);
 }
 
 async function saveJPG(){
-  const target = document.getElementById('capture');
-  const canvas = await html2canvas(target, {
-    scale: 3,
-    useCORS: true
-  });
-
-  const link = document.createElement('a');
-  link.href = canvas.toDataURL("image/jpeg", 1.0);
-  link.download = "schedule.jpg";
-  link.click();
+const target=document.getElementById("capture");
+const canvas=await html2canvas(target,{scale:3,useCORS:true});
+const link=document.createElement("a");
+link.href=canvas.toDataURL("image/jpeg",1.0);
+link.download="schedule.jpg";
+link.click();
 }
 </script>
 
